@@ -17,15 +17,14 @@
             Random random = new Random(); //random initialization 
             randomDiceRoll = random.Next(1, 7); //through numbers 11 and 6...7 will be excluded
 
-            Console.WriteLine($"{randomDiceRoll} is not it!");
+            if (randomDiceRoll != diceRollComputer)
+            {
+                Console.WriteLine($"{randomDiceRoll} is not it!");
+                keyPressed = Console.ReadKey(true).Key;
 
-            keyPressed = Console.ReadKey(true).Key;
-
+            }
         }
 
         Console.WriteLine($"You rolled {randomDiceRoll} which is matches the computer's roll of {diceRollComputer}");
-
-
-
     }
 }

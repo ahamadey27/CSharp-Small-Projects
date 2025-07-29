@@ -21,7 +21,6 @@
             {
                 Console.WriteLine($"{randomDiceRoll} is not it!");
                 keyPressed = Console.ReadKey(true).Key;
-
             }
         }
 

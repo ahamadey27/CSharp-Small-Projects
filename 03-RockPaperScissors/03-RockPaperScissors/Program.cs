@@ -30,5 +30,18 @@
             default: Console.WriteLine("Wrong choice"); break;
         }
 
+        Console.WriteLine($"You choose {playerMoveString} and computer chose {computerMoveString}");
+
+        if (playerMove == computerMove)
+        {
+            Console.WriteLine("It's a draw");
+        }
+
+        else if ((playerMove == 1 && computerMove == 3) || (playerMove == 2 && computerMove == 1) || playerMove == 3 && computerMove == 2)
+        {
+            Console.WriteLine("You win");
+        }
+        else
+            Console.WriteLine("You lost");
     }
 }

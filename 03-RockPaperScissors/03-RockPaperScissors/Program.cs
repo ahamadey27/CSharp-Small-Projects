@@ -1,5 +1,6 @@
 ﻿class Program
 {
+    //Game of rock paper scissors
     static void Main(string[] args)
     {
         Console.WriteLine("Rock paper scissors game");

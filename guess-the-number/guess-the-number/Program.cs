@@ -3,10 +3,12 @@
 
     //Initialize secret number to zero
     int secretNumber = 0;
+    int tries = 0;
 
     void Guess()
     {
         int guess = Convert.ToInt32(Console.ReadLine());
+        tries++;
         Console.WriteLine($"You guessed {guess}");
         if (guess < secretNumber)
         {
@@ -21,14 +23,14 @@
         }
         else
         {
-            Win(guess);
+            Win(guess, tries);
         }
     }
 
-    void Win(int guess)
+    void Win(int guess, int tries)
     {
 
-        Console.WriteLine($"You guessed the correct number of {guess}");
+        Console.WriteLine($"You guessed the correct number of {guess} with a total number of {tries} tries.");
     }
 
     static void Main(string[] args)

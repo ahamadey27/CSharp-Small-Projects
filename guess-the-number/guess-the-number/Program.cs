@@ -18,10 +18,13 @@
             Console.WriteLine($"You guessed {guess}");
             if (guess < program.secretNumber)
             {
-
+                Console.WriteLine($"No, the number is higher than {guess}. Guess again.");
+                Guess();
             }
             else if (guess > program.secretNumber)
             {
+                Console.WriteLine($"No, the number is lower than {guess}. Guess again.");
+                Guess();
 
             }
             else

@@ -50,6 +50,26 @@
         }
     }
 
+    public void HorizontalWin()
+    {
+        char[] playerCharacters = { 'X', 'O' };
+        foreach (char playerCharacter in playerCharacters)
+        {
+            if (((boardPositions[0] == playerCharacter) && (boardPositions[1] == playerCharacter) && (boardPositions[2] == playerCharacter)) || ((boardPositions[3] == playerCharacter) && (boardPositions[4] == playerCharacter) && (boardPositions[5] == playerCharacter)) || ((boardPositions[6] == playerCharacter) && (boardPositions[7] == playerCharacter) && (boardPositions[8] == playerCharacter)))
+            {
+                Console.Clear();
+                if (playerCharacter == 'X')
+                {
+                    Console.WriteLine("Player one has achieved a horizontal win");
+                }
+                else if (playerCharacter == 'O')
+                {
+                    Console.WriteLine("Player two has achieved a horizontal win");
+                }
+                break; //ends foreach loop
+            }
+        }
+    }
 
 
     public static void Main(string[] args)

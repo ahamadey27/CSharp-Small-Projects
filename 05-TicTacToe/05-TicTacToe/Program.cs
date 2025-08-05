@@ -29,28 +29,28 @@
 
         switch (input)
         {
-            case 0:
-                boardPositions[0] = playerCharacter; break;
             case 1:
                 boardPositions[0] = playerCharacter; break;
             case 2:
-                boardPositions[0] = playerCharacter; break;
+                boardPositions[1] = playerCharacter; break;
             case 3:
-                boardPositions[0] = playerCharacter; break;
+                boardPositions[2] = playerCharacter; break;
             case 4:
-                boardPositions[0] = playerCharacter; break;
+                boardPositions[3] = playerCharacter; break;
             case 5:
-                boardPositions[0] = playerCharacter; break;
+                boardPositions[4] = playerCharacter; break;
             case 6:
-                boardPositions[0] = playerCharacter; break;
+                boardPositions[5] = playerCharacter; break;
             case 7:
-                boardPositions[0] = playerCharacter; break;
+                boardPositions[6] = playerCharacter; break;
             case 8:
-                boardPositions[0] = playerCharacter; break;
+                boardPositions[7] = playerCharacter; break;
             case 9:
-                boardPositions[0] = playerCharacter; break;
+                boardPositions[8] = playerCharacter; break;
         }
     }
+
+
 
     public static void Main(string[] args)
     {

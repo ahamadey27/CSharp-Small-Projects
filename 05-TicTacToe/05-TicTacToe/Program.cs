@@ -3,7 +3,7 @@
     public static char[] boardPositions = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
     public char playerCharacter = ' ';
 
-    public static void DrawBoard()
+    public void DrawBoard()
     {
         Console.WriteLine("     |     |     ");
         Console.WriteLine("  {0}  |  {1}  |  {2}  ", boardPositions[0], boardPositions[1], boardPositions[2]);
@@ -26,10 +26,38 @@
         {
             playerCharacter = 'O';
         }
+
+        switch (input)
+        {
+            case 0:
+                boardPositions[0] = playerCharacter; break;
+            case 1:
+                boardPositions[0] = playerCharacter; break;
+            case 2:
+                boardPositions[0] = playerCharacter; break;
+            case 3:
+                boardPositions[0] = playerCharacter; break;
+            case 4:
+                boardPositions[0] = playerCharacter; break;
+            case 5:
+                boardPositions[0] = playerCharacter; break;
+            case 6:
+                boardPositions[0] = playerCharacter; break;
+            case 7:
+                boardPositions[0] = playerCharacter; break;
+            case 8:
+                boardPositions[0] = playerCharacter; break;
+            case 9:
+                boardPositions[0] = playerCharacter; break;
+        }
     }
+
     public static void Main(string[] args)
     {
-        DrawBoard();
+        Program program = new Program();
+
+        program.Play(1, 5);
+        program.DrawBoard();
         Console.ReadLine();
     }
 

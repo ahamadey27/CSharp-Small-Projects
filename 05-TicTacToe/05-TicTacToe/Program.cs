@@ -1,9 +1,8 @@
 ﻿public class Program
 {
     public static char[] boardPositions = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-    public char playerCharacter = ' ';
 
-    public void DrawBoard()
+    public static void DrawBoard()
     {
         Console.WriteLine("     |     |     ");
         Console.WriteLine("  {0}  |  {1}  |  {2}  ", boardPositions[0], boardPositions[1], boardPositions[2]);
@@ -16,96 +15,101 @@
         Console.WriteLine("     |     |     ");
     }
 
-    public void Play(int player, int input)
+    public static bool Play(int player, int input)
     {
-        if (player == 1)
+        char playerCharacter = player == 1 ? 'X' : 'O';
+        if (input < 1 || input > 9)
         {
-            playerCharacter = 'X';
+            Console.WriteLine("Invalid position. Choose 1-9.");
+            return false;
         }
-        else if (player == 2)
+        if (boardPositions[input - 1] == 'X' || boardPositions[input - 1] == 'O')
         {
-            playerCharacter = 'O';
+            Console.WriteLine("Position already taken. Choose another.");
+            return false;
         }
-
-        switch (input)
-        {
-            case 1:
-                boardPositions[0] = playerCharacter; break;
-            case 2:
-                boardPositions[1] = playerCharacter; break;
-            case 3:
-                boardPositions[2] = playerCharacter; break;
-            case 4:
-                boardPositions[3] = playerCharacter; break;
-            case 5:
-                boardPositions[4] = playerCharacter; break;
-            case 6:
-                boardPositions[5] = playerCharacter; break;
-            case 7:
-                boardPositions[6] = playerCharacter; break;
-            case 8:
-                boardPositions[7] = playerCharacter; break;
-            case 9:
-                boardPositions[8] = playerCharacter; break;
-        }
+        boardPositions[input - 1] = playerCharacter;
+        return true;
     }
 
-    public void HorizontalWin()
+    public static bool CheckWin()
     {
-        char[] playerCharacters = { 'X', 'O' };
-        foreach (char playerCharacter in playerCharacters)
+        int[,] winPatterns = new int[,]
         {
-            if (((boardPositions[0] == playerCharacter) && (boardPositions[1] == playerCharacter) && (boardPositions[2] == playerCharacter)) || ((boardPositions[3] == playerCharacter) && (boardPositions[4] == playerCharacter) && (boardPositions[5] == playerCharacter)) || ((boardPositions[6] == playerCharacter) && (boardPositions[7] == playerCharacter) && (boardPositions[8] == playerCharacter)))
+            {0,1,2}, {3,4,5}, {6,7,8}, // Horizontal
+            {0,3,6}, {1,4,7}, {2,5,8}, // Vertical
+            {0,4,8}, {2,4,6}           // Diagonal
+        };
+
+        for (int i = 0; i < winPatterns.GetLength(0); i++)
+        {
+            int a = winPatterns[i, 0], b = winPatterns[i, 1], c = winPatterns[i, 2];
+            if (boardPositions[a] == boardPositions[b] && boardPositions[b] == boardPositions[c])
             {
-                Console.Clear();
-                if (playerCharacter == 'X')
-                {
-                    Console.WriteLine("Player one has achieved a horizontal win");
-                }
-                else if (playerCharacter == 'O')
-                {
-                    Console.WriteLine("Player two has achieved a horizontal win");
-                }
-                break; //ends foreach loop
+                return true;
             }
         }
+        return false;
     }
 
-    public void VerticalWin()
+    public static bool IsDraw()
     {
-        char[] playerCharacters = { 'X', 'O' };
-        foreach (char playerCharacter in playerCharacters)
+        foreach (char pos in boardPositions)
         {
-            if (((boardPositions[0] == playerCharacter) && (boardPositions[3] == playerCharacter) && (boardPositions[6] == playerCharacter)) || ((boardPositions[1] == playerCharacter) && (boardPositions[4] == playerCharacter) && (boardPositions[7] == playerCharacter)) || ((boardPositions[2] == playerCharacter) && (boardPositions[8] == playerCharacter) && (boardPositions[8] == playerCharacter)))
-            {
-                Console.Clear();
-                if (playerCharacter == 'X')
-                {
-                    Console.WriteLine("Player one has achieved a vertical win");
-                }
-                else
-                {
-                    Console.WriteLine("Player two has achieved a vertical win");
-                }
-                break; //ends foreach loop
-            }
+            if (pos != 'X' && pos != 'O')
+                return false;
         }
+        return true;
     }
 
     public static void Main(string[] args)
     {
-        Program program = new Program();
+        int currentPlayer = 1;
+        bool gameEnded = false;
 
-        program.Play(1, 1);
-        program.Play(1, 2);
-        program.Play(1, 3);
+        while (!gameEnded)
+        {
+            Console.Clear();
+            DrawBoard();
+            Console.WriteLine($"Player {currentPlayer} ({(currentPlayer == 1 ? 'X' : 'O')}), enter your move (1-9):");
+            string inputStr = Console.ReadLine();
+            int input;
+            if (!int.TryParse(inputStr, out input))
+            {
+                Console.WriteLine("Invalid input. Press Enter to continue.");
+                Console.ReadLine();
+                continue;
+            }
 
-        program.HorizontalWin();
-        Console.WriteLine();
-        program.DrawBoard();
+            if (!Play(currentPlayer, input))
+            {
+                Console.WriteLine("Press Enter to continue.");
+                Console.ReadLine();
+                continue;
+            }
+
+            if (CheckWin())
+            {
+                Console.Clear();
+                DrawBoard();
+                Console.WriteLine($"Player {currentPlayer} wins!");
+                gameEnded = true;
+            }
+            else if (IsDraw())
+            {
+                Console.Clear();
+                DrawBoard();
+                Console.WriteLine("It's a draw!");
+                gameEnded = true;
+            }
+            else
+            {
+                currentPlayer = currentPlayer == 1 ? 2 : 1;
+            }
+        }
+        Console.WriteLine("Game over. Press Enter to exit.");
         Console.ReadLine();
     }
-
 }
 
 

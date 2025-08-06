@@ -2,13 +2,15 @@
 {
     public class IO_classes
     {
-        public static void WriteTextExample()
+        public static void WriteReadText(string filename, string content)
         {
-            string writeText = "Hello Text";
-            File.WriteAllText("filename.txt", writeText);
-            //newly created text is read and stored in variable
-            string readText = File.ReadAllText("filename.txt");
-            //The read text is outputted
+            //write content to file
+            File.WriteAllText(filename, content);
+
+            //Read the content back from the file
+            string readText = File.ReadAllText(filename);
+
+            //output the read text
             Console.WriteLine(readText);
         }
     }
